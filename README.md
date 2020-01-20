@@ -90,5 +90,5 @@ So why is this all the way at the bottom? Well, nowadays most of the application
 
 * <a href="https://martinfowler.com/articles/microservices.html"> Microservice architecture </a> (Martin Fowler is a leading figure in software architecture)
 * <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)"> Cross Site Scripting</a>. This is the security issue CORS is trying to protect you from. 
-* <a href="https://owasp.org/www-project-top-ten/">Top 10 Web Application Security Risks</a>. A nice place to get start with web security in general.  
+* <a href="https://owasp.org/www-project-top-ten/">Top 10 Web Application Security Risks</a>. A good place to get started with web security in general.  
 * <a href="https://developer.mozilla.org/nl/docs/Web/HTTP/CORS">CORS </a>. This is bit of a dry read. Advice: read the first couple of paragraphs and use the rest to trouble shoot your CORS errors if you encounter them.
