@@ -84,7 +84,7 @@ You can also let the development server use a proxy. That way, your browser thin
 ```
 This works the best if all your axios requests are reading the baseUrl from your .env file. For further reference look up the cra docs about <a href="https://create-react-app.dev/docs/proxying-api-requests-in-development">proxying</a> and <a href="https://create-react-app.dev/docs/adding-custom-environment-variables"> environment variables</a>. To finish it all off, <a href="https://create-react-app.dev/docs/using-https-in-development/">run your dev-server over https</a>: `HTTPS=true npm start`. <small>(for bash)</small>.
 
-So why is this all the way at the bottom? Well, nowadays most of the applications are often deployed as small units called services. The term for that is a <a href="https://martinfowler.com/articles/microservices.html"> microservice architecture </a>. So normally your back-end would run on another domain than your front-end, your database or your file server (like Cloudinary). Besides, you're going to stumble upon CORS errors sooner or later anyways. ;) It's usefull to know how they are caused and how to deal with them.
+So why is this all the way at the bottom? Well, nowadays most of the applications are often deployed as small units called services. The term for that is <a href="https://martinfowler.com/articles/microservices.html"> microservice architecture </a>. So normally your back-end would run on another domain than your front-end, your database or your file server (like Cloudinary). Besides, you're going to stumble upon CORS errors sooner or later anyways. ;) It's usefull to know how they are caused and how to deal with them.
 
 ### Further readings:
 
