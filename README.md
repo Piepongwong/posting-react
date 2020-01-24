@@ -1,19 +1,19 @@
 
 # Sending Post Data with React and CORS
 
-Besides from reading from another data source, we can also use Axios to send data. You already know the most you need to know. You know how to control forms with React and you know how to use Axios. What's left is sending data from your form with Axios! This lesson is using <a href="https://ih-beers-api.herokuapp.com/">this api</a>.
+Besides from reading from another data source, we can also use Axios to send data. You already know the most you need to know. You know how to control forms with React and you know how to use Axios. What's left is sending data from your form with Axios! This lesson is also explaining what CORS is and how to deal with it. It's time to have that talk. However, CORS is not something that is specific to React. We're going to use <a href="https://ih-beers-api.herokuapp.com/">this api</a> for the examples.
 
 ## CORS
-There are a couple of pitfalls when sending data with React, especially in development. Most of them are caused by Cross Origin Resource Sharing (CORS) errors. CORS is a security feature that tries to prevent an attack called<a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)"> cross site scripting</a>. To prevent XSS browsers and servers don't trust different domains (origins) by default. In a SPA architecture it's common to host the client and server on different domains. If that's the case with your app, your React client and your Express backend do not trust each other. However, you could decide to host your client and backend on the same origin, meaning the same  transport layer (http or https), domain and port: `transportlayer://domain:port`. 
+There are a couple of pitfalls when sending data with React, especially in development. Most of them are caused by Cross Origin Resource Sharing (CORS) errors. Those errors are thrown by a security feature that tries to prevent an attack called<a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)"> cross site scripting</a>. To prevent XSS browsers and servers don't trust different origins by default. An origin consists out of a **transport layer (http or https), domain and port: `transportlayer://domain:port`. When any of those parts different, the origins are considered to be different!** In a SPA architecture it's common to host the client and server on different domains. If that's the case with your app, your React client and your Express backend do not trust each other by default. However, you could decide to host your client and backend on the same origin.
 
-In development you're probably using the development server that create react app set you up with. That development server is running on a different port than your backend. Therefore, in development you're probably hosting your app on different domains. 
+In development you're probably using the development server that create react app has set you up with. That development server is running on a different port than your backend. Therefore, in development you're probably hosting your app on different origins. 
 
-Another thing to keep in mind is that sending data tightens the security settings of CORS even stronger. Whether you're sending data or not and in which format (x-www-form-url-encoded or json) influences CORS errors. 
+Another thing to keep in mind, is that you can and have to configure the CORS setting on both the client and the server. The server needs to trust the client that is requesting information and the client needs to trust the server it's sending data to. Sending data tightens the security settings of CORS on the client stronger. Whether you're sending data or not and in which format (x-www-form-url-encoded or json) influences CORS errors. 
 
 Alright, so how to deal with CORS?
 
 ## Method 1: Do not trigger CORS
-If you send data in the "x-www-form-urlencoded" format, the CORS settings are less tight and you can send it normally. However, you need to parse the data you have in your state into the x-www-form-urlencoded format. You do that with the <a href="https://www.npmjs.com/package/qs"> qs library </a>. In the qs docs you'll find examples with require, but it works just as fine with import:
+If you send data in the "x-www-form-urlencoded" format, the CORS settings are less tight and you can send it normally. However, you need to parse the data you have in your state from a javascript object into the x-www-form-urlencoded format. You do that with the <a href="https://www.npmjs.com/package/qs"> qs library </a>. Querystring are in the  x-www-form-urlencoded format. In the qs docs you'll find examples with require, but it works just as fine with import:
 
 ```
     import qs from "qs";
@@ -43,6 +43,8 @@ If you send data in the "x-www-form-urlencoded" format, the CORS settings are le
 
 ```
 
+When you're creating your own backend for the final project, you still need to enable cors on the server. You can use the <a href="https://www.npmjs.com/package/cors" />cors library </a> for that.
+
 ## Method 2: Allow CORS
 If you want to send data from the client to the backend, you have to consider the data format. If you really want to send it in JSON, you have to pass the withCredentials option to axios: 
 
@@ -71,7 +73,7 @@ If you want to send data from the client to the backend, you have to consider th
     ...
 ```
 
-When you're creating your own backend for the final project, you still need to enable cors in express. You can use the <a href="https://www.npmjs.com/package/cors" />cors library </a> for that.
+When you're creating your own backend for the final project, you still need to enable cors on the server. You can use the <a href="https://www.npmjs.com/package/cors" />cors library </a> for that.
 
 ## Method 3 Circumvent CORS all together
 You can also let the development server use a proxy. That way, your browser and server think everything is hosted on the same domain and CORS will not even be an issue. You have to put the following in your package.json file: 
@@ -87,13 +89,17 @@ This works the best if all your Axios requests are reading the baseUrl from your
 So why is this method all the way at the bottom? Well, nowadays most of the applications are often deployed as small units called services. The term for that is <a href="https://martinfowler.com/articles/microservices.html"> microservice architecture </a>. So normally your back-end would run on another domain than your front-end, your database or your file server (like Cloudinary). Besides, you're going to stumble upon CORS errors sooner or later anyways. ;) It's usefull to know how they are caused and how to deal with them.
 
 ## **Questions**
-* If you run your react dev server with `HTTPS=true npm start` and you run your local backend normally, would you get a CORS error? Why would you/won't you?
+* What is an origin?
+* Why would you use the qs library. What does it do?
+* Why would you use the cors library. What does it do?
+* If you run your react dev server with `HTTPS=true npm start` and you run your local backend normally, would you get a CORS error? Why would you/wouldn't you?
 * If you get a CORS error, why wouldn't that show up in the network tab of your dev tools? Where does it show instead?
 * Take a look at the following .env.development variable for your react app: 
     ```
         REACT_APP_API=localhost:3000
     ```
-    Why would this likely cause a CORS error? What part of the origin is missing?
+    Why would is this likely to cause a CORS error? What part of the origin is missing?
+* Where do you change the CORS security settings? On the client side, server side or both?
 
 ### Further readings:
 
