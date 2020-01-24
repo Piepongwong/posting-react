@@ -1,10 +1,10 @@
 
-# Sending Post Data with React
+# Sending Post Data with React and CORS
 
 Besides from reading from another data source, we can also use Axios to send data. You already know the most you need to know. You know how to control forms with React and you know how to use Axios. What's left is sending data from your form with Axios! This lesson is using <a href="https://ih-beers-api.herokuapp.com/">this api</a>.
 
 ## CORS
-There are a couple of pitfalls when sending data with React, especially in development. Most of them are caused by Cross Origin Resource Sharing (CORS) errors. CORS is a security feature that tries to prevent an attack called<a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)"> cross site scripting</a>. To prevent XSS browsers and servers don't trust different domains (origins) by default. In a SPA architecture it's common to host the client and server on different domains. If that's the case with your app, your React client and your Express backend do not trust each other. However, you could decide to host your client and backend on the same domain, meaning the same url, port and transport layer (http or https). 
+There are a couple of pitfalls when sending data with React, especially in development. Most of them are caused by Cross Origin Resource Sharing (CORS) errors. CORS is a security feature that tries to prevent an attack called<a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)"> cross site scripting</a>. To prevent XSS browsers and servers don't trust different domains (origins) by default. In a SPA architecture it's common to host the client and server on different domains. If that's the case with your app, your React client and your Express backend do not trust each other. However, you could decide to host your client and backend on the same origin, meaning the same  transport layer (http or https), domain and port: `transportlayer://domain:port`. 
 
 In development you're probably using the development server that create react app set you up with. That development server is running on a different port than your backend. Therefore, in development you're probably hosting your app on different domains. 
 
