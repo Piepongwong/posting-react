@@ -86,6 +86,15 @@ This works the best if all your Axios requests are reading the baseUrl from your
 
 So why is this method all the way at the bottom? Well, nowadays most of the applications are often deployed as small units called services. The term for that is <a href="https://martinfowler.com/articles/microservices.html"> microservice architecture </a>. So normally your back-end would run on another domain than your front-end, your database or your file server (like Cloudinary). Besides, you're going to stumble upon CORS errors sooner or later anyways. ;) It's usefull to know how they are caused and how to deal with them.
 
+## **Questions**
+* If you run your react dev server with `HTTPS=true npm start` and you run your local backend normally, would you get a CORS error? Why would you/won't you?
+* If you get a CORS error, why wouldn't that show up in the network tab of your dev tools? Where does it show instead?
+* Take a look at the following .env.development variable for your react app: 
+    ```
+        REACT_APP_API=localhost:3000
+    ```
+    Why would this likely cause a CORS error? What part of the origin is missing?
+
 ### Further readings:
 
 * <a href="https://martinfowler.com/articles/microservices.html"> Microservice architecture </a> (Martin Fowler is a leading figure in software architecture)
